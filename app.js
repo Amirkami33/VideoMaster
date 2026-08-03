@@ -1,11 +1,5 @@
-// ===============================
-// ViCut App
-// ===============================
-
-
-// عناصر صفحه
-
 const fileInput = document.getElementById("file");
+
 const chooseVideo = document.getElementById("chooseVideo");
 
 const video = document.getElementById("video");
@@ -18,31 +12,27 @@ const timeText = document.querySelector(".time-text");
 
 
 
-// ===============================
-// انتخاب ویدیو
-// ===============================
 
 
-chooseVideo.addEventListener("click", function(e){
+// باز کردن انتخاب ویدیو
 
-    e.preventDefault();
+chooseVideo.onclick = () => {
 
     fileInput.click();
 
-});
+};
 
 
 
 
-// ===============================
-// دریافت ویدیو
-// ===============================
 
 
-fileInput.addEventListener("change", function(){
+// انتخاب فایل
+
+fileInput.onchange = () => {
 
 
-    const file = this.files[0];
+    let file = fileInput.files[0];
 
 
     if(!file){
@@ -53,48 +43,40 @@ fileInput.addEventListener("change", function(){
 
 
 
-    const videoURL = URL.createObjectURL(file);
+    let url = URL.createObjectURL(file);
 
 
 
-    video.src = videoURL;
+    video.src = url;
+
+
+    video.controls = true;
 
 
     video.load();
 
 
 
-    // حذف صفحه انتخاب
 
-    if(placeholder){
+    // مخفی کردن دکمه و متن
 
-        placeholder.style.display = "none";
-
-    }
+    chooseVideo.style.visibility = "hidden";
 
 
-
-    if(chooseVideo){
-
-        chooseVideo.remove();
-
-    }
+    placeholder.style.display = "none";
 
 
 
-});
+};
 
 
 
 
 
 
-// ===============================
 // اطلاعات ویدیو
-// ===============================
 
-
-video.addEventListener("loadedmetadata", function(){
+video.onloadedmetadata = () => {
 
 
     timeText.innerHTML =
@@ -104,28 +86,17 @@ video.addEventListener("loadedmetadata", function(){
     formatTime(video.duration);
 
 
-
-});
-
+};
 
 
 
 
 
-// ===============================
+
+
 // حرکت تایم لاین
-// ===============================
 
-
-video.addEventListener("timeupdate", function(){
-
-
-    if(!video.duration){
-
-        return;
-
-    }
-
+video.ontimeupdate = () => {
 
 
     let percent =
@@ -151,9 +122,7 @@ video.addEventListener("timeupdate", function(){
     formatTime(video.duration);
 
 
-
-});
-
+};
 
 
 
@@ -161,78 +130,31 @@ video.addEventListener("timeupdate", function(){
 
 
 
-// ===============================
-// ابزارها
-// ===============================
+function formatTime(time){
 
 
-const tools = document.querySelectorAll(".tool");
-
-
-tools.forEach(tool => {
-
-
-    tool.addEventListener("click", function(){
-
-
-
-        tools.forEach(item=>{
-
-            item.classList.remove("active");
-
-        });
-
-
-
-        this.classList.add("active");
-
-
-
-    });
-
-
-
-});
-
-
-
-
-
-
-
-
-// ===============================
-// تبدیل زمان
-// ===============================
-
-
-function formatTime(seconds){
-
-
-    if(isNaN(seconds)){
+    if(isNaN(time)){
 
         return "00:00";
 
     }
 
 
+    let m = Math.floor(time / 60);
 
-    let minutes = Math.floor(seconds / 60);
-
-
-    let secondsPart = Math.floor(seconds % 60);
+    let s = Math.floor(time % 60);
 
 
 
-    if(secondsPart < 10){
+    if(s < 10){
 
-        secondsPart = "0" + secondsPart;
+        s = "0" + s;
 
     }
 
 
 
-    return minutes + ":" + secondsPart;
+    return m + ":" + s;
 
 
 }
