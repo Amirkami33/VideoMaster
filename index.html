@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VideoMaster</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="topbar">
+        <h1>🎬 VideoMaster</h1>
+        <p>ویرایشگر حرفه‌ای ویدیو</p>
+    </header>
+
+    <main>
+
+        <section class="upload-box">
+
+            <input type="file" id="videoInput" accept="video/*">
+
+            <video id="videoPlayer" controls></video>
+
+            <div class="info">
+
+                <p>نام فایل:
+                    <span id="fileName">-</span>
+                </p>
+
+                <p>حجم:
+                    <span id="fileSize">-</span>
+                </p>
+
+                <p>مدت زمان:
+                    <span id="videoDuration">-</span>
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
