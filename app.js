@@ -1,38 +1,31 @@
 const fileInput = document.getElementById("file");
-
 const chooseVideo = document.getElementById("chooseVideo");
 
 const video = document.getElementById("video");
-
 const placeholder = document.querySelector(".placeholder");
 
 const marker = document.querySelector(".marker");
-
 const timeText = document.querySelector(".time-text");
 
 
 
+// انتخاب ویدیو
 
-
-// باز کردن انتخاب ویدیو
-
-chooseVideo.onclick = () => {
+chooseVideo.addEventListener("click", function(){
 
     fileInput.click();
 
-};
+});
 
 
 
 
+// دریافت فایل
+
+fileInput.addEventListener("change", function(){
 
 
-// انتخاب فایل
-
-fileInput.onchange = () => {
-
-
-    let file = fileInput.files[0];
+    const file = this.files[0];
 
 
     if(!file){
@@ -43,32 +36,27 @@ fileInput.onchange = () => {
 
 
 
-    let url = URL.createObjectURL(file);
+    const url = URL.createObjectURL(file);
 
 
 
     video.src = url;
 
-
     video.controls = true;
 
+    video.style.display = "block";
 
-    video.load();
+    video.play();
 
-
-
-
-    // مخفی کردن دکمه و متن
-
-    chooseVideo.style.visibility = "hidden";
 
 
     placeholder.style.display = "none";
 
+    chooseVideo.style.display = "none";
 
 
-};
 
+});
 
 
 
@@ -76,7 +64,7 @@ fileInput.onchange = () => {
 
 // اطلاعات ویدیو
 
-video.onloadedmetadata = () => {
+video.addEventListener("loadedmetadata", function(){
 
 
     timeText.innerHTML =
@@ -86,8 +74,7 @@ video.onloadedmetadata = () => {
     formatTime(video.duration);
 
 
-};
-
+});
 
 
 
@@ -96,16 +83,24 @@ video.onloadedmetadata = () => {
 
 // حرکت تایم لاین
 
-video.ontimeupdate = () => {
+video.addEventListener("timeupdate", function(){
 
 
-    let percent =
+    if(!video.duration){
+
+        return;
+
+    }
+
+
+
+    let progress =
 
     (video.currentTime / video.duration) * 90 + 5;
 
 
 
-    marker.style.left = percent + "%";
+    marker.style.left = progress + "%";
 
 
 
@@ -122,39 +117,37 @@ video.ontimeupdate = () => {
     formatTime(video.duration);
 
 
-};
+});
 
 
 
 
 
 
+function formatTime(seconds){
 
-function formatTime(time){
 
-
-    if(isNaN(time)){
+    if(isNaN(seconds)){
 
         return "00:00";
 
     }
 
 
-    let m = Math.floor(time / 60);
+    let min = Math.floor(seconds / 60);
 
-    let s = Math.floor(time % 60);
+    let sec = Math.floor(seconds % 60);
 
 
 
-    if(s < 10){
+    if(sec < 10){
 
-        s = "0" + s;
+        sec = "0" + sec;
 
     }
 
 
 
-    return m + ":" + s;
-
+    return min + ":" + sec;
 
 }
