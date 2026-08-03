@@ -2,10 +2,11 @@
 <html lang="fa" dir="rtl">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>VideoMaster</title>
+<title>ViCut</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -15,13 +16,13 @@
 <body>
 
 
-<header class="app-header">
+<header class="header">
 
     <div class="logo">
-        🥇 VideoMaster
+        ViCut
     </div>
 
-    <button class="export-btn">
+    <button class="export">
         خروجی
     </button>
 
@@ -29,30 +30,45 @@
 
 
 
-<main class="editor">
+
+<main>
 
 
-<section class="preview-area">
+<section class="preview">
 
-    <video id="videoPlayer" controls></video>
+    <video id="video" controls></video>
 
-    <div class="empty-text">
-        ابتدا یک ویدیو انتخاب کنید
+    <div class="placeholder">
+        انتخاب ویدیو
     </div>
 
-    <button id="selectVideo">
-        🎬 انتخاب ویدیو
+    <button id="chooseVideo">
+        انتخاب ویدیو
     </button>
 
 </section>
 
 
 
-<section class="timeline">
 
-    <div class="timeline-line"></div>
+<section class="time-area">
+
+    <div class="time-text">
+        00:00 / 00:00
+    </div>
+
+
+    <div class="timeline">
+
+        <div class="line"></div>
+
+        <div class="marker"></div>
+
+    </div>
 
 </section>
+
+
 
 
 
@@ -60,79 +76,73 @@
 <section class="tools">
 
 
-<button class="tool" data-tool="cut">
-✂️
-<span>برش</span>
-</button>
+<div class="tool active">
+    <div class="icon">✂</div>
+    <span>برش</span>
+</div>
 
 
-<button class="tool" data-tool="audio">
-🎵
-<span>صدا</span>
-</button>
+<div class="tool">
+    <div class="icon">♪</div>
+    <span>صدا</span>
+</div>
 
 
-<button class="tool" data-tool="text">
-T
-<span>متن</span>
-</button>
+<div class="tool">
+    <div class="icon">T</div>
+    <span>متن</span>
+</div>
 
 
-<button class="tool" data-tool="filter">
-🎨
-<span>فیلتر</span>
-</button>
+<div class="tool">
+    <div class="icon">◐</div>
+    <span>فیلتر</span>
+</div>
 
 
-<button class="tool" data-tool="speed">
-⚡
-<span>سرعت</span>
-</button>
+<div class="tool">
+    <div class="icon">⚡</div>
+    <span>سرعت</span>
+</div>
 
 
-<button class="tool" data-tool="rotate">
-🔄
-<span>چرخش</span>
-</button>
-
-
-<button class="tool" data-tool="effect">
-✨
-<span>افکت</span>
-</button>
-
-
-</section>
-
-
-
-
-<section class="settings-panel">
-
-<h3 id="toolTitle">
-تنظیمات ابزار
-</h3>
-
-
-<div id="toolContent">
-یک ابزار را انتخاب کنید
+<div class="tool">
+    <div class="icon">✦</div>
+    <span>افکت</span>
 </div>
 
 
 </section>
 
 
-</main>
 
+
+
+<section class="panel">
+
+<h3>
+برش ویدیو
+</h3>
+
+
+<p>
+نقطه شروع و پایان را انتخاب کنید
+</p>
+
+
+</section>
 
 
 
 <input 
 type="file"
-id="videoInput"
+id="file"
 accept="video/*"
 hidden
 >
+
+
+</main>
 
 
 <script src="app.js"></script>
