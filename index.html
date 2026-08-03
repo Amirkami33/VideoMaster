@@ -18,14 +18,14 @@
 
 <header class="header">
 
-<div class="logo">
-ViCut
-</div>
+    <div class="logo">
+        ViCut
+    </div>
 
 
-<button class="export">
-خروجی
-</button>
+    <button class="export">
+        خروجی
+    </button>
 
 
 </header>
@@ -39,22 +39,21 @@ ViCut
 <section class="preview">
 
 
-<video id="video"></video>
+    <video id="video"></video>
 
 
-<div class="placeholder">
-هنوز ویدیویی انتخاب نشده
-</div>
+    <div class="placeholder">
+        ویدیو انتخاب کنید
+    </div>
 
 
-
-<button id="chooseVideo" type="button">
-🎬 انتخاب ویدیو
-</button>
-
+    <button id="chooseVideo">
+        🎬 انتخاب ویدیو
+    </button>
 
 
 </section>
+
 
 
 
@@ -63,25 +62,42 @@ ViCut
 <section class="time-area">
 
 
-<div class="time-text">
-00:00 / 00:00
-</div>
+    <div class="time-text">
+        00:00 / 00:00
+    </div>
 
 
 
-<div class="timeline">
+
+    <div class="timeline">
 
 
-<div class="line"></div>
-
-<div class="marker"></div>
+        <div class="clip-track">
 
 
-</div>
+            <div class="clip-range"></div>
+
+
+            <div class="handle left-handle"></div>
+
+
+            <div class="handle right-handle"></div>
+
+
+            <div class="play-marker"></div>
+
+
+        </div>
+
+
+
+    </div>
 
 
 
 </section>
+
+
 
 
 
@@ -93,51 +109,91 @@ ViCut
 
 <div class="tool active">
 
-<div class="icon">✂</div>
+    <div class="icon">
+        ✂
+    </div>
 
-<span>برش</span>
+    <span>
+        برش
+    </span>
 
 </div>
+
 
 
 
 <div class="tool">
 
-<div class="icon">♪</div>
+    <div class="icon">
+        ♪
+    </div>
 
-<span>صدا</span>
+    <span>
+        صدا
+    </span>
 
 </div>
+
 
 
 
 <div class="tool">
 
-<div class="icon">T</div>
+    <div class="icon">
+        T
+    </div>
 
-<span>متن</span>
+    <span>
+        متن
+    </span>
 
 </div>
+
 
 
 
 <div class="tool">
 
-<div class="icon">◐</div>
+    <div class="icon">
+        ◐
+    </div>
 
-<span>فیلتر</span>
+    <span>
+        فیلتر
+    </span>
 
 </div>
+
 
 
 
 <div class="tool">
 
-<div class="icon">⚡</div>
+    <div class="icon">
+        ⚡
+    </div>
 
-<span>سرعت</span>
+    <span>
+        سرعت
+    </span>
 
 </div>
+
+
+
+
+<div class="tool">
+
+    <div class="icon">
+        ✦
+    </div>
+
+    <span>
+        افکت
+    </span>
+
+</div>
+
 
 
 </section>
@@ -146,7 +202,10 @@ ViCut
 
 
 
+
+
 <section class="panel">
+
 
 <h3>
 ✂️ برش ویدیو
@@ -154,7 +213,7 @@ ViCut
 
 
 <p>
-انتخاب نقطه شروع و پایان کلیپ
+شروع و پایان کلیپ را انتخاب کنید
 </p>
 
 
@@ -165,11 +224,12 @@ ViCut
 
 
 <input 
-type="file"
 id="file"
+type="file"
 accept="video/*"
 hidden
 >
+
 
 
 
@@ -177,7 +237,7 @@ hidden
 
 
 
-<script src="app.js?v=4"></script>
+<script src="app.js?v=5"></script>
 
 
 </body>
