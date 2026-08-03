@@ -1,86 +1,47 @@
-const videoInput = document.getElementById("videoInput");
-const selectVideo = document.getElementById("selectVideo");
+const fileInput = document.getElementById("file");
+const chooseBtn = document.getElementById("chooseVideo");
 
-const videoPlayer = document.getElementById("videoPlayer");
-const emptyText = document.querySelector(".empty-text");
+const video = document.getElementById("video");
+const placeholder = document.querySelector(".placeholder");
 
-
-const tools = document.querySelectorAll(".tool");
-
-const toolTitle = document.getElementById("toolTitle");
-const toolContent = document.getElementById("toolContent");
+const marker = document.querySelector(".marker");
+const timeText = document.querySelector(".time-text");
 
 
 
 // باز کردن انتخاب ویدیو
 
-selectVideo.addEventListener("click", function(){
+chooseBtn.addEventListener("click",()=>{
 
-    videoInput.click();
+    fileInput.click();
 
 });
+
 
 
 
 
 // دریافت ویدیو
 
-videoInput.addEventListener("change", function(){
-
-    const file = this.files[0];
+fileInput.addEventListener("change",()=>{
 
 
-    if(!file){
-        return;
-    }
+    const file = fileInput.files[0];
+
+
+    if(!file) return;
+
 
 
     const url = URL.createObjectURL(file);
 
 
-    videoPlayer.src = url;
+    video.src = url;
 
 
-    emptyText.style.display = "none";
+    placeholder.style.display="none";
 
-
-    selectVideo.style.display = "none";
-
-
-    console.log("Video:", file.name);
-
-});
-
-
-
-
-
-// ابزارها
-
-
-tools.forEach(tool => {
-
-
-    tool.addEventListener("click", function(){
-
-
-        tools.forEach(item=>{
-
-            item.classList.remove("active");
-
-        });
-
-
-        this.classList.add("active");
-
-
-        let name = this.dataset.tool;
-
-
-        openTool(name);
-
-
-    });
+    chooseBtn.style.display="none";
 
 
 });
@@ -89,68 +50,86 @@ tools.forEach(tool => {
 
 
 
-function openTool(name){
+// وقتی اطلاعات ویدیو آماده شد
+
+video.addEventListener("loadedmetadata",()=>{
 
 
-    if(name === "cut"){
+    let total = formatTime(video.duration);
 
-        toolTitle.innerHTML="✂️ برش";
 
-        toolContent.innerHTML=`
+    timeText.innerHTML =
+    "00:00 / " + total;
 
-        <p>انتخاب محدوده ویدیو</p>
 
-        <input type="range">
+});
 
-        `;
+
+
+
+
+
+
+// حرکت نشانگر روی تایم لاین
+
+video.addEventListener("timeupdate",()=>{
+
+
+    let current = video.currentTime;
+
+    let duration = video.duration;
+
+
+    if(duration){
+
+
+        let percent =
+        (current / duration) * 90 + 5;
+
+
+        marker.style.left =
+        percent + "%";
+
+
+
+        timeText.innerHTML =
+        formatTime(current)
+        +
+        " / "
+        +
+        formatTime(duration);
+
+
+    }
+
+
+});
+
+
+
+
+
+
+
+// تبدیل زمان
+
+function formatTime(seconds){
+
+
+    let min = Math.floor(seconds / 60);
+
+    let sec = Math.floor(seconds % 60);
+
+
+
+    if(sec < 10){
+
+        sec="0"+sec;
 
     }
 
 
-
-    else if(name === "audio"){
-
-
-        toolTitle.innerHTML="🎵 صدا";
-
-        toolContent.innerHTML=`
-
-        <p>تنظیم صدا</p>
-
-        <input type="range">
-
-        `;
-
-
-    }
-
-
-
-    else if(name === "text"){
-
-
-        toolTitle.innerHTML="📝 متن";
-
-        toolContent.innerHTML=`
-
-        <input placeholder="متن خود را وارد کنید">
-
-        `;
-
-
-    }
-
-
-
-    else{
-
-
-        toolTitle.innerHTML=name;
-
-        toolContent.innerHTML="به زودی اضافه می‌شود";
-
-
-    }
+    return min + ":" + sec;
 
 
 }
