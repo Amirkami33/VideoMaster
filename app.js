@@ -4,132 +4,45 @@ const chooseBtn = document.getElementById("chooseVideo");
 const video = document.getElementById("video");
 const placeholder = document.querySelector(".placeholder");
 
-const marker = document.querySelector(".marker");
-const timeText = document.querySelector(".time-text");
 
+// باز کردن فایل
 
+chooseBtn.onclick = function(){
 
-// باز کردن انتخاب ویدیو
-
-chooseBtn.addEventListener("click",()=>{
+    console.log("button clicked");
 
     fileInput.click();
 
-});
+};
 
 
 
+// انتخاب فایل
+
+fileInput.onchange = function(){
+
+    const file = this.files[0];
 
 
-// دریافت ویدیو
+    if(!file){
 
-fileInput.addEventListener("change",()=>{
-
-
-    const file = fileInput.files[0];
-
-
-    if(!file) return;
-
-
-
-    const url = URL.createObjectURL(file);
-
-
-    video.src = url;
-
-
-    placeholder.style.display="none";
-
-    chooseBtn.style.display="none";
-
-
-});
-
-
-
-
-
-// وقتی اطلاعات ویدیو آماده شد
-
-video.addEventListener("loadedmetadata",()=>{
-
-
-    let total = formatTime(video.duration);
-
-
-    timeText.innerHTML =
-    "00:00 / " + total;
-
-
-});
-
-
-
-
-
-
-
-// حرکت نشانگر روی تایم لاین
-
-video.addEventListener("timeupdate",()=>{
-
-
-    let current = video.currentTime;
-
-    let duration = video.duration;
-
-
-    if(duration){
-
-
-        let percent =
-        (current / duration) * 90 + 5;
-
-
-        marker.style.left =
-        percent + "%";
-
-
-
-        timeText.innerHTML =
-        formatTime(current)
-        +
-        " / "
-        +
-        formatTime(duration);
-
+        return;
 
     }
 
 
-});
+    console.log("selected:", file.name);
 
 
+    const videoURL = URL.createObjectURL(file);
 
 
+    video.src = videoURL;
 
 
+    video.style.display = "block";
 
-// تبدیل زمان
-
-function formatTime(seconds){
-
-
-    let min = Math.floor(seconds / 60);
-
-    let sec = Math.floor(seconds % 60);
+    placeholder.style.display = "none";
 
 
-
-    if(sec < 10){
-
-        sec="0"+sec;
-
-    }
-
-
-    return min + ":" + sec;
-
-
-}
+};
