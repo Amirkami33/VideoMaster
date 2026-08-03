@@ -1,9 +1,9 @@
-// VideoMaster App
-
 const videoInput = document.getElementById("videoInput");
-const videoPlayer = document.getElementById("videoPlayer");
+const selectVideo = document.getElementById("selectVideo");
 
+const videoPlayer = document.getElementById("videoPlayer");
 const emptyText = document.querySelector(".empty-text");
+
 
 const tools = document.querySelectorAll(".tool");
 
@@ -12,25 +12,20 @@ const toolContent = document.getElementById("toolContent");
 
 
 
+// باز کردن انتخاب ویدیو
 
-// انتخاب ویدیو
+selectVideo.addEventListener("click", function(){
 
-document.body.addEventListener("click", function(e){
-
-    if(e.target.closest(".preview-area")){
-
-        videoInput.click();
-
-    }
+    videoInput.click();
 
 });
 
 
 
 
+// دریافت ویدیو
 
 videoInput.addEventListener("change", function(){
-
 
     const file = this.files[0];
 
@@ -40,29 +35,21 @@ videoInput.addEventListener("change", function(){
     }
 
 
+    const url = URL.createObjectURL(file);
 
-    const videoURL = URL.createObjectURL(file);
 
-
-    videoPlayer.src = videoURL;
+    videoPlayer.src = url;
 
 
     emptyText.style.display = "none";
 
 
+    selectVideo.style.display = "none";
 
-    console.log("نام فایل:", file.name);
 
-    console.log(
-        "حجم:",
-        (file.size / 1024 / 1024).toFixed(2),
-        "MB"
-    );
-
+    console.log("Video:", file.name);
 
 });
-
-
 
 
 
@@ -77,32 +64,23 @@ tools.forEach(tool => {
     tool.addEventListener("click", function(){
 
 
-        // حذف حالت انتخاب قبلی
+        tools.forEach(item=>{
 
-        tools.forEach(t=>{
-
-            t.classList.remove("active");
+            item.classList.remove("active");
 
         });
 
 
-
-        // فعال کردن ابزار انتخاب شده
-
         this.classList.add("active");
 
 
-
-        let selected = this.dataset.tool;
-
+        let name = this.dataset.tool;
 
 
-        showTool(selected);
-
+        openTool(name);
 
 
     });
-
 
 
 });
@@ -111,113 +89,68 @@ tools.forEach(tool => {
 
 
 
+function openTool(name){
+
+
+    if(name === "cut"){
+
+        toolTitle.innerHTML="✂️ برش";
+
+        toolContent.innerHTML=`
+
+        <p>انتخاب محدوده ویدیو</p>
+
+        <input type="range">
+
+        `;
+
+    }
 
 
 
-function showTool(tool){
+    else if(name === "audio"){
 
 
-    switch(tool){
+        toolTitle.innerHTML="🎵 صدا";
 
+        toolContent.innerHTML=`
 
-        case "cut":
+        <p>تنظیم صدا</p>
 
-            toolTitle.innerHTML="✂️ برش ویدیو";
+        <input type="range">
 
-            toolContent.innerHTML=`
-
-            <p>انتخاب نقطه شروع و پایان</p>
-
-            <input type="range">
-
-            `;
-
-        break;
-
-
-
-
-        case "audio":
-
-            toolTitle.innerHTML="🎵 تنظیم صدا";
-
-            toolContent.innerHTML=`
-
-            <p>ولوم صدا</p>
-
-            <input type="range">
-
-            `;
-
-        break;
-
-
-
-
-
-        case "text":
-
-            toolTitle.innerHTML="📝 افزودن متن";
-
-            toolContent.innerHTML=`
-
-            <input placeholder="متن خود را بنویسید">
-
-            `;
-
-        break;
-
-
-
-
-
-        case "filter":
-
-            toolTitle.innerHTML="🎨 فیلتر";
-
-            toolContent.innerHTML=`
-
-            <button>روشنایی</button>
-
-            <button>کنتراست</button>
-
-            `;
-
-        break;
-
-
-
-
-
-        case "speed":
-
-            toolTitle.innerHTML="⚡ سرعت";
-
-            toolContent.innerHTML=`
-
-            <button>0.5x</button>
-
-            <button>1x</button>
-
-            <button>2x</button>
-
-            `;
-
-        break;
-
-
-
-
-
-        default:
-
-            toolTitle.innerHTML="ابزار انتخاب شده";
-
-            toolContent.innerHTML="به زودی اضافه می‌شود";
+        `;
 
 
     }
 
+
+
+    else if(name === "text"){
+
+
+        toolTitle.innerHTML="📝 متن";
+
+        toolContent.innerHTML=`
+
+        <input placeholder="متن خود را وارد کنید">
+
+        `;
+
+
+    }
+
+
+
+    else{
+
+
+        toolTitle.innerHTML=name;
+
+        toolContent.innerHTML="به زودی اضافه می‌شود";
+
+
+    }
 
 
 }
