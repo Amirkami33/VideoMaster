@@ -2,50 +2,136 @@
 <html lang="fa" dir="rtl">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>VideoMaster</title>
+<title>VideoMaster</title>
 
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-    <header class="topbar">
-        <h1>🎬 VideoMaster</h1>
-        <p>ویرایشگر حرفه‌ای ویدیو</p>
-    </header>
 
-    <main>
+<header class="app-header">
 
-        <section class="upload-box">
+    <div class="logo">
+        VideoMaster
+    </div>
 
-            <input type="file" id="videoInput" accept="video/*">
+    <button class="export-btn">
+        خروجی
+    </button>
 
-            <video id="videoPlayer" controls></video>
+</header>
 
-            <div class="info">
 
-                <p>نام فایل:
-                    <span id="fileName">-</span>
-                </p>
 
-                <p>حجم:
-                    <span id="fileSize">-</span>
-                </p>
+<main class="editor">
 
-                <p>مدت زمان:
-                    <span id="videoDuration">-</span>
-                </p>
 
-            </div>
+<section class="preview-area">
 
-        </section>
+    <video id="videoPlayer" controls></video>
 
-    </main>
+    <div class="empty-text">
+        ویدیو را انتخاب کنید
+    </div>
 
-    <script src="app.js"></script>
+</section>
+
+
+
+<section class="timeline">
+
+    <div class="timeline-line"></div>
+
+</section>
+
+
+
+<section class="tools">
+
+
+<div class="tool">
+    ✂️
+    <span>برش</span>
+</div>
+
+
+<div class="tool">
+    🎵
+    <span>صدا</span>
+</div>
+
+
+<div class="tool">
+    T
+    <span>متن</span>
+</div>
+
+
+<div class="tool">
+    🎨
+    <span>فیلتر</span>
+</div>
+
+
+<div class="tool">
+    ⚡
+    <span>سرعت</span>
+</div>
+
+
+<div class="tool">
+    📐
+    <span>اندازه</span>
+</div>
+
+
+<div class="tool">
+    ✨
+    <span>افکت</span>
+</div>
+
+
+<div class="tool">
+    😊
+    <span>استیکر</span>
+</div>
+
+
+</section>
+
+
+
+<section class="settings-panel">
+
+    <h3>
+        تنظیمات ابزار
+    </h3>
+
+    <p>
+        یک ابزار را انتخاب کنید
+    </p>
+
+</section>
+
+
+</main>
+
+
+<input 
+type="file"
+id="videoInput"
+accept="video/*"
+hidden
+>
+
+
+<script src="app.js"></script>
 
 </body>
 
